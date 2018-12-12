@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Exam_Master_SutterlinKleinclaus_EditeurMap"
         mc:Ignorable="d"
-        Title="MainWindow" Height="800" Width="800">
-   
+        Title="MainWindow" Height="800" Width="1200">
+
     <Grid>
         <DockPanel HorizontalAlignment="Left" VerticalAlignment="Top">
             <Menu DockPanel.Dock="Top">
@@ -23,7 +23,9 @@
             </Menu>
         </DockPanel>
         <Canvas x:Name="MyMap" HorizontalAlignment="Left" Height="640" Margin="50,50,0,0" VerticalAlignment="Top" Width="640" Grid.Row="20" Grid.Column="20"/>
-
+        <Canvas x:Name="MyTiledMap" HorizontalAlignment="Left" Height="640" Margin="788,50,0,0" VerticalAlignment="Top" Width="362">
+            <Image Source="/Assets/blocks1.png" Width="{Binding Path=ActualWidth, ElementName=MyTiledMap}" Height="{Binding Path=ActualHeight, ElementName=MyTiledMap}" Stretch="Uniform"/>
+        </Canvas>
 
     </Grid>
 </Window>

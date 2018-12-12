@@ -20,23 +20,32 @@ namespace Exam_Master_SutterlinKleinclaus_EditeurMap
         int _Y;
 
         ///<summary>
-        ///Accesseurs
+        ///Accesseurs Width
         /// </summary>
         public int Width
         {
             get { return _Width; }
             set { _Width = value; }
         }
+        ///<summary>
+        ///Accesseurs Height
+        /// </summary>
         public int Height
         {
             get { return _Height; }
             set { _Height = value; }
         }
+        ///<summary>
+        ///Accesseurs X
+        /// </summary>
         public int X
         {
             get { return _X; }
             set { _X = value; }
         }
+        ///<summary>
+        ///Accesseurs Y
+        /// </summary>
         public int Y
         {
             get { return _Y; }
