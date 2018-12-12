@@ -22,11 +22,8 @@
                 </MenuItem>
             </Menu>
         </DockPanel>
-        <Canvas HorizontalAlignment="Left" Height="640" Margin="50,50,0,0" VerticalAlignment="Top" Width="640" Grid.Row="10" Grid.Column="10">
-            <Rectangle Height="64" StrokeThickness="2" Width="64" Stroke="Black"/>
+        <Canvas x:Name="MyMap" HorizontalAlignment="Left" Height="640" Margin="50,50,0,0" VerticalAlignment="Top" Width="640" Grid.Row="20" Grid.Column="20"/>
 
-        </Canvas>
-        
 
     </Grid>
 </Window>
