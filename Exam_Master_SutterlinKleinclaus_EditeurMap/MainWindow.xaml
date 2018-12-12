@@ -5,8 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Exam_Master_SutterlinKleinclaus_EditeurMap"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="800" Width="800">
+   
     <Grid>
+        <DockPanel HorizontalAlignment="Left" VerticalAlignment="Top">
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="_File">
+                    <MenuItem Header="_New"/>
+                    <MenuItem Header="_Open"/>
+                    <MenuItem Header="_Save"/>
+                    <Separator />
+                    <MenuItem Header="_Exit"/>
+                </MenuItem>
+            </Menu>
+        </DockPanel>
+        <Canvas HorizontalAlignment="Left" Height="640" Margin="65,68,0,0" VerticalAlignment="Top" Width="640" Grid.Row="10" Grid.Column="10">
+            <Rectangle Height="64" StrokeThickness="2" Width="64" Stroke="Black"/>
+
+        </Canvas>
         
+
     </Grid>
 </Window>
