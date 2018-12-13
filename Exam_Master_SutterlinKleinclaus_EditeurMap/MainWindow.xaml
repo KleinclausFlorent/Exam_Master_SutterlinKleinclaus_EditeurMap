@@ -22,10 +22,17 @@
                 </MenuItem>
             </Menu>
         </DockPanel>
-        <Canvas x:Name="MyMap" HorizontalAlignment="Left" Height="640" Margin="50,50,0,0" VerticalAlignment="Top" Width="640" Grid.Row="20" Grid.Column="20"/>
-        <Canvas x:Name="MyTiledMap" HorizontalAlignment="Left" Height="640" Margin="788,50,0,0" VerticalAlignment="Top" Width="362">
-            <Image Source="/Assets/blocks1.png" Width="{Binding Path=ActualWidth, ElementName=MyTiledMap}" Height="{Binding Path=ActualHeight, ElementName=MyTiledMap}" Stretch="Uniform"/>
+        <Canvas x:Name="MyMap" HorizontalAlignment="Left" Height="640" Margin="50,50,0,0" VerticalAlignment="Top" Width="640" Grid.Row="20" Grid.Column="20">
+            <TextBox x:Name="Texte_test" Height="23" Canvas.Left="307" TextWrapping="Wrap" Text="TextBox" Canvas.Top="535" Width="120"/>
         </Canvas>
+        <Canvas x:Name="MyTiledMap" HorizontalAlignment="Left" Height="163" Margin="788,527,0,0" VerticalAlignment="Top" Width="362">
+            <Image x:Name="Image_Tileset" HorizontalAlignment="Left" Height="171" VerticalAlignment="Top" Width="317" Source="blocks1.png" Canvas.Left="35" Canvas.Top="10" RenderTransformOrigin="0.566,3.147"/>
+        </Canvas>
+        <Canvas x:Name="Canvas_Test" HorizontalAlignment="Left" Height="369" Margin="720,79,0,0" VerticalAlignment="Top" Width="398"/>
+        <Button x:Name="Save" Content="Sauvegarder" HorizontalAlignment="Left" Margin="671,726,0,0" VerticalAlignment="Top" Width="75" Click="On_Save_Click"/>
+
+
+
 
     </Grid>
 </Window>

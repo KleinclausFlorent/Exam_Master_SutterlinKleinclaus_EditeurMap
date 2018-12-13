@@ -18,10 +18,23 @@ namespace Exam_Master_SutterlinKleinclaus_EditeurMap
         int _Height;
         int _X;
         int _Y;
+        int _Value;
 
         ///<summary>
-        ///Accesseurs Width
+        ///Accesseurs Value
         /// </summary>
+        
+
+        public int Value
+        {
+            get { return _Value; }
+            set { _Value = value; }
+        }
+
+        /// <summary>
+        /// Accesseurs Width
+        /// </summary>
+
         public int Width
         {
             get { return _Width; }
@@ -53,14 +66,15 @@ namespace Exam_Master_SutterlinKleinclaus_EditeurMap
         }
 
         /// <summary>
-        /// Constructeur permettant d'initiliser toutes les valeurs
+        /// Constructeur permettant d'initialiser toutes les valeurs
         /// </summary>
-        public Case(int mWidth,int mHeight, int mX, int mY)
+        public Case(int mWidth,int mHeight, int mX, int mY, int mValue)
         {
             _Width = mWidth;
             _Height = mHeight;
             _X = mX;
             _Y = mY;
+            _Value = mValue;
         }
     }
 }
