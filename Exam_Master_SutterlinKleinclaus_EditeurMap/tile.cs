@@ -48,6 +48,12 @@ namespace Exam_Master_SutterlinKleinclaus_EditeurMap
             set { _value = value; }
         }
 
+        /// <summary>
+        /// Constructeur Tile
+        /// </summary>
+        /// <param name="mi"></param>
+        /// <param name="mj"></param>
+        /// <param name="mvalue"></param>
         public Tile(int mi, int mj, int mvalue)
         {
             this.i = mi;

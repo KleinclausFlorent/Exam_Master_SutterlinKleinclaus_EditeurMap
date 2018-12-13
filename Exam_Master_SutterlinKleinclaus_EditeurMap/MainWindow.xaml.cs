@@ -27,7 +27,7 @@ namespace Exam_Master_SutterlinKleinclaus_EditeurMap
         int[,] tab_map = new int[8, 8]; //ce tableau représente les données constituant la map sur laquelle on travaille, qu'on peut charger et enregistrer.
         int[,] tab_tileset = new int[6, 5]; //celui là représente les données constituant le tileset qu'on souhaite charger.
         int memoire; //cette variable contient la valeur de la case du tileset qu'on a cliqué.
-
+        Rectangle RectMem;
 
        
 
@@ -45,7 +45,9 @@ namespace Exam_Master_SutterlinKleinclaus_EditeurMap
 
             Init_Tabs(); //fonction définie un peu plus loin permettant d'initier les tableaux.
 
-            int mTaille_Case = 64;
+            Init_Tiledmap();
+
+            int mTaille_Case = 32;
             // int mNombre_Case = Convert.ToInt32(MyMap.Width) / mTaille_Case;
             int mNombre_Case = 8;
             for (int i = 0; i < mNombre_Case; i++)
@@ -71,6 +73,7 @@ namespace Exam_Master_SutterlinKleinclaus_EditeurMap
                     Canvas.SetLeft(rect, mCase.X);
                     Canvas.SetTop(rect, mCase.Y);
                     MyMap.Children.Add(rect); //jusque là, c'est ton code.
+                    
                     rect.MouseLeftButtonDown += (s, e) => //Important: ce code gère l'évènement "click sur un rectangle ajouté dans le canvas"
                     {                                     //le += est une façon de dire "override" je crois, mais jsuis pas sur. En tous cas faut le mettre.
                         //on est dans le cas de figure ou un rectangle est cliqué. Ce qui est pratique, c'est qu'il sait quel rectangle est cliqué !
@@ -81,25 +84,13 @@ namespace Exam_Master_SutterlinKleinclaus_EditeurMap
 
                         tab_map[k, l] = memoire; //on met la valeur qu'on a gardé en mémoire dans le tableau.
                         Texte_test.Text = tab_map[k,l].ToString(); //ca me sert à débugguer. Ici j'affiche ce que je viens de mettre dans le tableau.
-                        rect.Fill = test_couleur(tab_map, k, l); //je remplis le carré avec la bonne couleur.
-
-
-
-                      
+                        rect.Fill = test_couleur(tab_map, k, l); //je remplis le carré avec la bonne couleur.                   
 
                     };
-
-
-
-
-
+                    
                 }
-
-
-
-
             }
-            
+
             //maintenant on dessine le tableau représentant le tileset
             for (int i = 0; i < 6; i++)
             {
@@ -120,7 +111,7 @@ namespace Exam_Master_SutterlinKleinclaus_EditeurMap
                     Canvas.SetLeft(rect2, mCase2.X);
                     Canvas.SetTop(rect2, mCase2.Y);
                     Canvas_Test.Children.Add(rect2);
-
+                    
                     rect2.MouseLeftButtonDown += (s, e) =>
                     {
                        //quand on clique sur une case de la grille deux, on récupère la valeur associée à la case cliquée.
@@ -130,33 +121,57 @@ namespace Exam_Master_SutterlinKleinclaus_EditeurMap
 
 
                     };
-
-                    // var img = new Image();
-                    //pour créer des instances d'images: https://stackoverflow.com/questions/29201453/spawning-images-pictureboxes
-                    //a terme, faudra remplacer le code qui crée des rectangles par des images. (je pense)
-
-
-
-
-
-
                 }
-
-
-
-
             }
-
-
-
-            /* ça marche pas et je sais pas pourquoi. Du coup, j'ai fait la même chose dans le xaml et ça s'affiche correctement dans l'éditeur mais pas dans l'exe
-            Image image = new Image();
-            image.Source = (new ImageSourceConverter()).ConvertFromString("/Assets/blocks1.png") as ImageSource;
-            Canvas.SetLeft(image, 0);
-            Canvas.SetTop(image, 0);
-            MyTiledMap.Children.Add(image);
-            */
         }
+
+        /// <summary>
+        ///  Fonction d'init Tilemap
+        /// </summary>        
+        private void Init_Tiledmap()
+        {
+            //Nombre de place dispo dans mon canvas 
+            int CanvasNbCol = Convert.ToInt32(MyTiledMap.Width) / 32;
+            int CanvasNbLigne = Convert.ToInt32(MyTiledMap.Height) / 32;
+            Image[] myimages = new Image[CanvasNbCol * CanvasNbLigne];
+            int cmpt_image = 0;
+
+            for (int i = 0; i < CanvasNbLigne; i++)
+            {
+                for (int j = 0; j < CanvasNbCol; j++)
+                {
+                    myimages[cmpt_image] = new Image();
+                    myimages[cmpt_image].Width = 32;
+                    Canvas.SetLeft(myimages[cmpt_image], j * 32 );
+                    Canvas.SetTop(myimages[cmpt_image], i * 32 );
+                    cmpt_image++;
+                }
+            }
+             //Charge l'image
+            BitmapImage myBitmapImage = new BitmapImage();
+            myBitmapImage.BeginInit();
+            myBitmapImage.UriSource = new Uri(@"D:\ludus\2018-2019\Exam_1\Exam_Master_SutterlinKleinclaus_EditeurMap\Exam_Master_SutterlinKleinclaus_EditeurMap\Assets\blocks1.png");
+            myBitmapImage.EndInit();
+
+            
+            int compteurImage = 0;
+            int nbColonne = Convert.ToInt32(myBitmapImage.PixelWidth) / 32;
+            int nbLigne = Convert.ToInt32(myBitmapImage.PixelHeight) / 32;
+
+            for (int i = 0; i < nbLigne; i++)
+            {
+                for (int j = 0; j < nbColonne-1; j++)
+                {
+                    Int32Rect myrect = new Int32Rect( (j*34)+2, (i*34)+2 ,  32, 32);
+                    CroppedBitmap cb = new CroppedBitmap(myBitmapImage,myrect);
+                   
+                    myimages[compteurImage].Source = cb;
+                    MyTiledMap.Children.Add(myimages[compteurImage]);
+                    compteurImage++;
+               }
+            }
+        }
+        
         /// <summary>
         /// la fonction permettant d'initialiser les tableaux.
         /// </summary>
@@ -191,6 +206,7 @@ namespace Exam_Master_SutterlinKleinclaus_EditeurMap
         /// <param name="i"> le numéro de ligne</param>
         /// <param name="j"> le numéro de colonne</param>
         /// <returns> Une couleur</returns>
+
         private SolidColorBrush test_couleur(int[,] tableau, int i, int j)
         {
             switch (tableau[i, j]) {
@@ -212,6 +228,7 @@ namespace Exam_Master_SutterlinKleinclaus_EditeurMap
 
             }
         }
+        
         /// <summary>
         /// La fonction qui s'active quand on appuie sur le bouton sauvegarder. Permet de générer un fichier xml.
         /// </summary>
@@ -243,6 +260,43 @@ namespace Exam_Master_SutterlinKleinclaus_EditeurMap
             {
                 xs.Serialize(wr, ListMap); //on lui donne streamwriter en paramètre, et l'objet liste.
             }
+        }
+
+        /// <summary>
+        /// La fonction gère le clique sur canvas test
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Canvas_Test_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.OriginalSource is Rectangle)
+            {
+                MessageBox.Show("You've touched n°" + Canvas_Test.Children.IndexOf(e.OriginalSource as UIElement));
+            }
+        }
+
+        /// <summary>
+        /// La fonction gère le clique sur canvas my map
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MyMap_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.OriginalSource is Rectangle)
+            {
+                MessageBox.Show("You've touched n°" + MyMap.Children.IndexOf(e.OriginalSource as UIElement));
+            }
+        }
+
+        /// <summary>
+        /// La fonction qui gère le clique sur mon tilemap
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MyTiledMap_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            MessageBox.Show("You've touched n°" + MyTiledMap.Children.IndexOf(e.OriginalSource as UIElement));
+            int index = MyTiledMap.Children.IndexOf(e.OriginalSource as UIElement);
         }
     }
 }
