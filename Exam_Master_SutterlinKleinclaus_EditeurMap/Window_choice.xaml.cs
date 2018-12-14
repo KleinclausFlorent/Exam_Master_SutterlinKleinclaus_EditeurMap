@@ -30,11 +30,22 @@ namespace Exam_Master_SutterlinKleinclaus_EditeurMap
 
         private void Valider_Click(object sender, RoutedEventArgs e)
         {
-            choix_largeur = int.Parse(Textbox_largeur.Text);
-            choix_longueur = int.Parse(Textbox_longueur.Text);
-            MainWindow winmain = new MainWindow(choix_taille,choix_longueur,choix_largeur);
-            winmain.Show();
-            this.Close();
+            //on vérifie que l'utilisateur rentre des données exploitables
+           if(( int.TryParse(Textbox_largeur.Text, out choix_largeur))&&(int.TryParse(Textbox_longueur.Text, out choix_longueur)))
+            {
+                MainWindow winmain = new MainWindow(choix_taille, choix_longueur, choix_largeur);
+                winmain.Show();
+                this.Close();
+                
+            }
+            else
+            {
+                Text_warning.Opacity = 1;
+                Text_warning.Text = "Attention ! Il faut mettre des nombres dans les cases !";
+            }
+            //choix_largeur = int.Parse(Textbox_largeur.Text);
+            //choix_longueur = int.Parse(Textbox_longueur.Text);
+           
 
         }
 

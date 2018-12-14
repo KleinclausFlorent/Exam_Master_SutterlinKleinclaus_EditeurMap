@@ -17,6 +17,7 @@
         <TextBox x:Name="Textbox_longueur" HorizontalAlignment="Left" Height="23" Margin="293,236,0,0" TextWrapping="Wrap" Text="Longueur" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="Textbox_largeur" HorizontalAlignment="Left" Height="23" Margin="293,280,0,0" TextWrapping="Wrap" Text="Largeur" VerticalAlignment="Top" Width="120"/>
         <TextBlock x:Name="Text_Affichage" HorizontalAlignment="Left" Margin="580,140,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
+        <TextBlock x:Name="Text_warning" HorizontalAlignment="Left" Margin="321,330,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Opacity="0"/>
 
     </Grid>
 </Window>
