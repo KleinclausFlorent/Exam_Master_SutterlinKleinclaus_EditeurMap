@@ -25,10 +25,11 @@
         <Canvas x:Name="MyMap" HorizontalAlignment="Left" Height="640" Margin="50,50,0,0" VerticalAlignment="Top" Width="640" Grid.Row="20" Grid.Column="20" MouseLeftButtonDown="MyMap_MouseLeftButtonDown">
             <TextBox x:Name="Texte_test" Height="23" Canvas.Left="307" TextWrapping="Wrap" Text="TextBox" Canvas.Top="535" Width="120"/>
         </Canvas>
-        <Canvas x:Name="MyTiledMap" HorizontalAlignment="Left" Height="684" Margin="740,50,0,0" VerticalAlignment="Top" Width="684" MouseLeftButtonDown="MyTiledMap_MouseLeftButtonDown">
+        <Canvas x:Name="MyTiledMap" HorizontalAlignment="Left" Height="684" Margin="740,50,0,0" VerticalAlignment="Top" Width="684" MouseLeftButtonDown="MyTiledMap_MouseLeftButtonDown" MouseEnter="MyTiledMap_MouseEnter">
          </Canvas>
         <Canvas x:Name="Canvas_Test" HorizontalAlignment="Left" Height="369" Margin="254,724,0,0" VerticalAlignment="Top" Width="398" MouseLeftButtonDown="Canvas_Test_MouseLeftButtonDown"/>
         <Button x:Name="Save" Content="Sauvegarder" HorizontalAlignment="Left" Margin="97,695,0,0" VerticalAlignment="Top" Width="75" Click="On_Save_Click"/>
+        <Button x:Name="Charger" Content="Button" HorizontalAlignment="Left" Margin="97,724,0,0" VerticalAlignment="Top" Width="75" Click="Click_Charger"/>
 
 
     </Grid>
