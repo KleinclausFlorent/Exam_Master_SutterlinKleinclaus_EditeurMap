@@ -32,10 +32,12 @@ namespace Exam_Master_SutterlinKleinclaus_EditeurMap
         List<Image> Liste_ImgTiledmap = new List<Image>();
         List<Image_tile> List_ImageTile = new List<Image_tile>(); //liste des images constituant le tileset
         CroppedBitmap memory; //contient l'image que j'ai cliquée
-       // int choix;
+        
+        //Variables globales tailles
+        int choixtaille;
 
 
-        string emptyblock = @"C:\Users\Seb\Documents\CoursLUDUS\Master\M1\Examen_1\Exam_Master_SutterlinKleinclaus_EditeurMap\Exam_Master_SutterlinKleinclaus_EditeurMap\Assets\blockvide.png";
+        string emptyblock;
         string TilemapFile;
         string MapFile;
 
@@ -51,11 +53,28 @@ namespace Exam_Master_SutterlinKleinclaus_EditeurMap
         /// </remarks>
         public MainWindow(int mchoixtaille, int mchoixlongueur,int mchoixlargeur)
         {
-          //  choix = mchoixtaille;
-           // System.Windows.MessageBox.Show(choix.ToString());
+            //System.Windows.MessageBox.Show(mchoixtaille.ToString());
+            if (mchoixtaille == 16)
+            {
+                emptyblock = @"pack://application:,,,/blockvide16.png";
+            } else if (mchoixtaille == 32)
+            {
+                emptyblock = @"pack://application:,,,/blockvide32.png";
+            } else if (mchoixtaille == 64)
+            {
+                emptyblock = @"pack://application:,,,/blockvide64.png";
+            } else
+            {
+                mchoixtaille = 32;
+                emptyblock = @"pack://application:,,,/blockvide32.png";
+            }
+            choixtaille = mchoixtaille;
+
 
             InitializeComponent();
-           
+
+            MyMap.Width = mchoixlargeur;
+            MyMap.Height = mchoixlongueur;
 
             Init_Tiledmap();
 
@@ -69,8 +88,8 @@ namespace Exam_Master_SutterlinKleinclaus_EditeurMap
         private void Init_Tiledmap()
         {
             //Nombre de place dispo dans mon canvas 
-            int CanvasNbCol = Convert.ToInt32(MyTiledMap.Width) / 32;
-            int CanvasNbLigne = Convert.ToInt32(MyTiledMap.Height) / 32;
+            int CanvasNbCol = Convert.ToInt32(MyTiledMap.Width) / choixtaille;
+            int CanvasNbLigne = Convert.ToInt32(MyTiledMap.Height) / choixtaille;
             Image[] myimages = new Image[CanvasNbCol * CanvasNbLigne];
          //   System.Windows.MessageBox.Show(choix.ToString());
             //Charge l'image
@@ -87,9 +106,9 @@ namespace Exam_Master_SutterlinKleinclaus_EditeurMap
                 for (int j = 0; j < CanvasNbCol; j++)
                 {
                     myimages[cmpt_image] = new Image();
-                    myimages[cmpt_image].Width = 32;
-                    Canvas.SetLeft(myimages[cmpt_image], j * 32 );
-                    Canvas.SetTop(myimages[cmpt_image], i * 32 );
+                    myimages[cmpt_image].Width = choixtaille;
+                    Canvas.SetLeft(myimages[cmpt_image], j * choixtaille);
+                    Canvas.SetTop(myimages[cmpt_image], i * choixtaille);
                     myimages[cmpt_image].Source = myBitmapImage;
                     Liste_ImgTiledmap.Add(myimages[cmpt_image]); // new line
                     MyTiledMap.Children.Add(myimages[cmpt_image]);
@@ -113,17 +132,18 @@ namespace Exam_Master_SutterlinKleinclaus_EditeurMap
 
             
             int compteurImage = 0;
-            int nbColonne = Convert.ToInt32(myBitmapImage.PixelWidth) / 32;
-            int nbLigne = Convert.ToInt32(myBitmapImage.PixelHeight) / 32;
-           
+            int nbColonne = Convert.ToInt32(myBitmapImage.PixelWidth) / choixtaille;
+            int nbLigne = Convert.ToInt32(myBitmapImage.PixelHeight) / choixtaille;
+
+
 
             for (int i = 0; i < nbLigne; i++)
             {
                 for (int j = 0; j < nbColonne-1; j++)
                 {
                     Image imagetest = new Image();
-                    Int32Rect myrect = new Int32Rect( (j*34)+2, (i*34)+2 ,  32, 32);
-                    CroppedBitmap cb = new CroppedBitmap(myBitmapImage,myrect);
+                    Int32Rect myrect = new Int32Rect( (j*(choixtaille+2)) +2, (i* (choixtaille + 2)) +2 , choixtaille, choixtaille);
+                    CroppedBitmap cb = new CroppedBitmap(myBitmapImage,myrect); // Cette ligne ne marche pas en 16 pixels sûrement à cause de i ou j qui sortent de l'image source
                    
                     Liste_ImgTiledmap[compteurImage].Source = cb;
                     Image_tile ig = new Image_tile();
@@ -164,7 +184,7 @@ namespace Exam_Master_SutterlinKleinclaus_EditeurMap
         {
 
             
-            int mTaille_Case = 32;
+            int mTaille_Case = choixtaille;
             int mNombre_Case = Convert.ToInt32(MyMap.Width) / mTaille_Case;
             //int mNombre_Case = 8;
             tab_map = new int[mNombre_Case, mNombre_Case];
@@ -288,8 +308,11 @@ namespace Exam_Master_SutterlinKleinclaus_EditeurMap
         {
             //permet de récupérer à la fois la valeur qu'on clique dans le tileset, mais aussi l'image correspondante.
             int index_click = MyTiledMap.Children.IndexOf(e.OriginalSource as UIElement);
-            memory = List_ImageTile[index_click].source;
-            memoire = List_ImageTile[index_click].nombre;
+            if ( index_click < List_ImageTile.Count())
+            {
+                memory = List_ImageTile[index_click].source;
+                memoire = List_ImageTile[index_click].nombre;
+            }
 
         }
         
@@ -452,6 +475,7 @@ namespace Exam_Master_SutterlinKleinclaus_EditeurMap
 
         private void MenuNew_Click(object sender, RoutedEventArgs e)
         {
+            /*
             BitmapImage myBitmapImage = new BitmapImage();
             myBitmapImage.BeginInit();
             myBitmapImage.UriSource = new Uri(emptyblock);
@@ -465,6 +489,10 @@ namespace Exam_Master_SutterlinKleinclaus_EditeurMap
                     k++;
                 }
             }
+            */
+            Window_choice winchoice = new Window_choice();
+            winchoice.Show();
+            this.Close();
         }
 
         

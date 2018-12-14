@@ -106,5 +106,10 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="blockvide16.png" />
+    <Resource Include="blockvide32.png" />
+    <Resource Include="blockvide64.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
