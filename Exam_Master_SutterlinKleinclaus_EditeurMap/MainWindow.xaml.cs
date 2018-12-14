@@ -32,6 +32,7 @@ namespace Exam_Master_SutterlinKleinclaus_EditeurMap
         List<Image> Liste_ImgTiledmap = new List<Image>();
         List<Image_tile> List_ImageTile = new List<Image_tile>(); //liste des images constituant le tileset
         CroppedBitmap memory; //contient l'image que j'ai cliquée
+       // int choix;
 
 
         string emptyblock = @"C:\Users\Seb\Documents\CoursLUDUS\Master\M1\Examen_1\Exam_Master_SutterlinKleinclaus_EditeurMap\Exam_Master_SutterlinKleinclaus_EditeurMap\Assets\blockvide.png";
@@ -48,11 +49,13 @@ namespace Exam_Master_SutterlinKleinclaus_EditeurMap
         /// Un objet contenant un tableau d'objet Case comme un objet Map permettra de garder en mémoire les cases créées et leurs positions. 
         /// On pourra rajouter d'autres informations dans l'objet case
         /// </remarks>
-        public MainWindow()
+        public MainWindow(int mchoixtaille, int mchoixlongueur,int mchoixlargeur)
         {
+          //  choix = mchoixtaille;
+           // System.Windows.MessageBox.Show(choix.ToString());
 
             InitializeComponent();
-            
+           
 
             Init_Tiledmap();
 
@@ -69,7 +72,7 @@ namespace Exam_Master_SutterlinKleinclaus_EditeurMap
             int CanvasNbCol = Convert.ToInt32(MyTiledMap.Width) / 32;
             int CanvasNbLigne = Convert.ToInt32(MyTiledMap.Height) / 32;
             Image[] myimages = new Image[CanvasNbCol * CanvasNbLigne];
-
+         //   System.Windows.MessageBox.Show(choix.ToString());
             //Charge l'image
             BitmapImage myBitmapImage = new BitmapImage();
 
@@ -463,5 +466,7 @@ namespace Exam_Master_SutterlinKleinclaus_EditeurMap
                 }
             }
         }
+
+        
     }
 }

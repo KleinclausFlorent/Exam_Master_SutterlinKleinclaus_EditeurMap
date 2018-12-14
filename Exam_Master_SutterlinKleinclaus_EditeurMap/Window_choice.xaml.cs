@@ -19,6 +19,10 @@ namespace Exam_Master_SutterlinKleinclaus_EditeurMap
     /// </summary>
     public partial class Window_choice : Window
     {
+        public int choix_taille;
+        public int choix_longueur;
+        public int choix_largeur;
+       // TextBox Textbox_largeur = new TextBox();
         public Window_choice()
         {
             InitializeComponent();
@@ -26,10 +30,31 @@ namespace Exam_Master_SutterlinKleinclaus_EditeurMap
 
         private void Valider_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow winmain = new MainWindow();
+            choix_largeur = int.Parse(Textbox_largeur.Text);
+            choix_longueur = int.Parse(Textbox_longueur.Text);
+            MainWindow winmain = new MainWindow(choix_taille,choix_longueur,choix_largeur);
             winmain.Show();
             this.Close();
 
+        }
+
+        private void Button16_Click(object sender, RoutedEventArgs e)
+        {
+            choix_taille = 16;
+            Text_Affichage.Text = choix_taille.ToString();
+
+        }
+
+        private void Button32_Click(object sender, RoutedEventArgs e)
+        {
+            choix_taille = 32;
+            Text_Affichage.Text = choix_taille.ToString();
+        }
+
+        private void Button64_Click(object sender, RoutedEventArgs e)
+        {
+            choix_taille = 64;
+            Text_Affichage.Text = choix_taille.ToString();
         }
     }
 }
