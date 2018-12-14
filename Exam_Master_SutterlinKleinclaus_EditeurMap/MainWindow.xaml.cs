@@ -34,7 +34,7 @@ namespace Exam_Master_SutterlinKleinclaus_EditeurMap
         CroppedBitmap memory; //contient l'image que j'ai cliquée
 
 
-        string emptyblock = @"D:\ludus\2018-2019\Exam_1\Exam_Master_SutterlinKleinclaus_EditeurMap\Exam_Master_SutterlinKleinclaus_EditeurMap\Assets\blockvide.png";
+        string emptyblock = @"C:\Users\Seb\Documents\CoursLUDUS\Master\M1\Examen_1\Exam_Master_SutterlinKleinclaus_EditeurMap\Exam_Master_SutterlinKleinclaus_EditeurMap\Assets\blockvide.png";
         string TilemapFile;
         string MapFile;
 
